@@ -104,7 +104,7 @@ public class WordCountMr extends Configured implements Tool {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(LongWritable.class);
 
-        job.setNumReduceTasks(3);
+//        job.setNumReduceTasks(3);
 
         int status = job.waitForCompletion(true) ? 0 : 1;
         return status;
