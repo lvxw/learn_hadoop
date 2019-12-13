@@ -13,12 +13,12 @@ public class RunWcJob {
     public static void main(String[] args) throws Exception {
         // 创建本次mr程序的job实例
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "hdfs://192.168.15.210:9000");
-        System.setProperty("HADOOP_USER_NAME","hadoop");
+        conf.set("fs.defaultFS", "hdfs://172.23.16.2:9000");
+        System.setProperty("HADOOP_USER_NAME","root");
         Job job = Job.getInstance(conf);
 
         FileSystem fileSystem = FileSystem.get(conf);
-        fileSystem.delete(new Path("/tmp/output"), true);
+        fileSystem.delete(new Path("/tmp/test/output"), true);
 
         // 指定本次job运行的主类
         job.setJarByClass(RunWcJob.class);
@@ -36,8 +36,8 @@ public class RunWcJob {
         job.setOutputValueClass(IntWritable.class);
 
         // 指定本次job待处理数据的目录 和程序执行完输出结果存放的目录
-        FileInputFormat.setInputPaths(job, new Path("/tmp/input"));
-        FileOutputFormat.setOutputPath(job, new Path("/tmp/output"));
+        FileInputFormat.setInputPaths(job, new Path("/tmp/test/input/1"));
+        FileOutputFormat.setOutputPath(job, new Path("/tmp/test/output"));
 
         // 提交本次job
         boolean b = job.waitForCompletion(true);

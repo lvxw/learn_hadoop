@@ -13,14 +13,28 @@
         <developer>
             <id>lvxw</id>
             <name>吕学文</name>
-            <email>lvxw@fun.tv</email>
+            <email>2622478542@@qq.com</email>
         </developer>
     </developers>
 
     <scm>
         <tag>HEAD</tag>
-        <developerConnection>scm:git:</developerConnection>
+        <developerConnection>scm:git:https://github.com/lvxw/learn_hadoop.git</developerConnection>
     </scm>
+    <repositories>
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <properties>
         <sonar.language>java</sonar.language>
@@ -32,10 +46,10 @@
         <test.src.dir>src/test/java</test.src.dir>
         <test.res.dir>src/test/resources</test.res.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jarfile.name>Artemis</jarfile.name>
+        <jarfile.name>LearnHadoop</jarfile.name>
         <jar.out.dir>jar</jar.out.dir>
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
-        <hadoop.version>2.7.2</hadoop.version>
+        <hadoop.version>2.7.7</hadoop.version>
     </properties>
     <dependencies>
         <dependency>
@@ -52,6 +66,17 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
             <version>${hadoop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.10</version>
         </dependency>
     </dependencies>
     <build>

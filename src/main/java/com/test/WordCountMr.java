@@ -26,11 +26,6 @@ public class WordCountMr extends Configured implements Tool {
         private final static LongWritable ONE = new LongWritable(1);
 
         @Override
-        protected void setup(Context context) throws IOException, InterruptedException {
-
-        }
-
-        @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String[] wordArr = value.toString().split("\\s");
             for(String word : wordArr){
@@ -56,8 +51,8 @@ public class WordCountMr extends Configured implements Tool {
             for (LongWritable value : values) {
                 total += value.get();
             }
-            mos.write(key,new LongWritable(total), outputBaseDir + File.separator + key.toString() + File.separator + key.toString());
-//            context.write(key, new LongWritable(total));
+//            mos.write(key,new LongWritable(total), outputBaseDir + File.separator + key.toString() + File.separator + key.toString());
+            context.write(key, new LongWritable(total));
         }
 
         @Override
@@ -86,7 +81,8 @@ public class WordCountMr extends Configured implements Tool {
         Job job = Job.getInstance(conf, this.getClass().getSimpleName());
         job.setJarByClass(WordCountMr.class);
 
-        Path output = new Path(conf.get("output_dir"));
+        String output_dir = conf.get("output_dir");
+        Path output = new Path(output_dir);
         FileSystem fs = FileSystem.get(conf);
         if (fs.exists(output)){
             fs.delete(output, true);
