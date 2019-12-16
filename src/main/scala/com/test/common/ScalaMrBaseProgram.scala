@@ -1,4 +1,4 @@
-package com.test
+package com.test.common
 
 import java.io.IOException
 import java.lang.reflect.ParameterizedType

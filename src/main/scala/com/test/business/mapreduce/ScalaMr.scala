@@ -1,19 +1,20 @@
-package com.test
+package com.test.business.mapreduce
 
 import java.io.IOException
 
+import com.test.common.ScalaMrBaseProgram
 import org.apache.hadoop.io.{LongWritable, Text}
 import org.apache.hadoop.mapreduce.{Mapper, Reducer}
 import org.apache.hadoop.util.StringUtils
 
-import scala.collection.JavaConverters._
 import scala.collection.mutable.Map
+import scala.collection.JavaConverters._
 
 /**
-  -Dinput_dir=/tmp/test/input
-  -Doutput_dir=/tmp/test/output
-  -DdefaultFS=hdfs://172.23.16.2:9000
-  -DhadoopUser=root
+  *-Dinput_dir=/tmp/test/input
+  *-Doutput_dir=/tmp/test/output
+  *-DdefaultFS=hdfs://172.23.16.2:9000
+  *-DhadoopUser=root
   */
 object ScalaMr extends ScalaMrBaseProgram {
   override protected def initComponentClassMap(componentClassMap: Map[String,Class[_]]): Unit = {
@@ -43,7 +44,3 @@ object ScalaMr extends ScalaMrBaseProgram {
     }
   }
 }
-
-
-
-

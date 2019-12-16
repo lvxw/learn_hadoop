@@ -1,15 +1,43 @@
-package com.test.wordcount;
+package com.test.business.mapreduce;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.StringUtils;
+
+import java.io.IOException;
 
 public class RunWcJob {
+    static class WcMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+        @Override
+        protected void map(LongWritable key, Text value, Mapper.Context context) throws IOException, InterruptedException {
+            String[] words = StringUtils.split(value.toString(), ' ');
+            for (String w : words) {
+                context.write(new Text(w), new IntWritable(1));
+            }
+        }
+    }
+
+    static class WcReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+        @Override
+        protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+            int sum = 0;
+            for (IntWritable i : values) {
+                sum = sum + i.get();
+            }
+            context.write(key, new IntWritable(sum));
+        }
+    }
+
+
     public static void main(String[] args) throws Exception {
         // 创建本次mr程序的job实例
         Configuration conf = new Configuration();
