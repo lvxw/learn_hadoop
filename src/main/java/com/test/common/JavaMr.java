@@ -6,13 +6,13 @@ import com.test.wordcount.WcReducer;
 import java.util.Map;
 
 /**
-    -DuserMrClass=com.test.common.MyMr
+    -DuserMrClass=com.test.common.JavaMr
     -Dinput_dir=/tmp/test/input
     -Doutput_dir=/tmp/test/output
-    -DclusterUrl=hdfs://172.23.16.2:9000
+    -DdefaultFS=hdfs://172.23.16.2:9000
     -DhadoopUser=root
  */
-public class MyMr extends JavaMrBaseProgram {
+public class JavaMr extends JavaMrBaseProgram {
     @Override
     protected void initComponentClassMap(Map<String, Class<?>> componentClassMap) {
         componentClassMap.put("mapper", WcMapper.class);

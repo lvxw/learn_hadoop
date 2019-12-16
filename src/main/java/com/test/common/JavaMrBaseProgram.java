@@ -29,15 +29,14 @@ public abstract class JavaMrBaseProgram extends Configured implements Tool {
     protected void  prepare() throws IOException {
         initComponentClassMap(componentClassMap);
 
-        if(conf.get("clusterUrl") != null){
-            conf.set("fs.defaultFS", conf.get("clusterUrl"));
+        if(conf.get("defaultFS") != null){
+            conf.set("fs.defaultFS", conf.get("defaultFS"));
         }
         if(conf.get("hadoopUser") != null){
             System.setProperty("HADOOP_USER_NAME", conf.get("hadoopUser"));
         }
 
-        FileSystem fileSystem = FileSystem.get(conf);
-        fileSystem.delete(new Path(conf.get("output_dir")), true);
+        FileSystem.get(conf).delete(new Path(conf.get("output_dir")), true);
     }
 
     protected void createJob() throws IOException {
