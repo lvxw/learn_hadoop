@@ -29,9 +29,6 @@ public abstract class JavaMrBaseProgram extends Configured implements Tool {
     protected void  prepare() throws IOException {
         initComponentClassMap(componentClassMap);
 
-        if(conf.get("defaultFS") != null){
-            conf.set("fs.defaultFS", conf.get("defaultFS"));
-        }
         if(conf.get("hadoopUser") != null){
             System.setProperty("HADOOP_USER_NAME", conf.get("hadoopUser"));
         }

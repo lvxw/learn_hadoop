@@ -22,7 +22,6 @@ abstract class ScalaMrBaseProgram extends Configured with Tool{
   @throws[IOException]
   protected def prepare(): Unit = {
     initComponentClassMap(componentClassMap)
-    if (conf.get("defaultFS") != null) conf.set("fs.defaultFS", conf.get("defaultFS"))
     if (conf.get("hadoopUser") != null) System.setProperty("HADOOP_USER_NAME", conf.get("hadoopUser"))
     FileSystem.get(conf).delete(new Path(conf.get("output_dir")), true)
   }

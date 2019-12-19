@@ -39,6 +39,7 @@
     <properties>
         <sonar.language>java</sonar.language>
         <java.version>1.8</java.version>
+        <scala.version>2.12.8</scala.version>
         <src.dir>src/main/scala</src.dir>
         <src.dir>src/main/java</src.dir>
         <src.res.dir>src/main/resources</src.res.dir>
@@ -50,6 +51,7 @@
         <jar.out.dir>jar</jar.out.dir>
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
         <hadoop.version>2.7.7</hadoop.version>
+        <alluxio.version>2.1.0</alluxio.version>
     </properties>
     <dependencies>
         <dependency>
@@ -78,6 +80,24 @@
             <artifactId>reflections</artifactId>
             <version>0.9.10</version>
         </dependency>
+        <dependency>
+            <groupId>org.alluxio</groupId>
+            <artifactId>alluxio-2.1.0-client</artifactId>
+            <version>${alluxio.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/alluxio-2.1.0-client.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.12.8</version>
+        </dependency>
+
     </dependencies>
     <build>
         <sourceDirectory>${src.dir}</sourceDirectory>
@@ -116,6 +136,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,7 +167,7 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>groupId:artifactId</include>
+                                    <include>org.scala-lang:scala-library</include>
                                 </includes>
                             </artifactSet>
                         </configuration>

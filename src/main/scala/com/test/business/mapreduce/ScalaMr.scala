@@ -11,10 +11,18 @@ import scala.collection.mutable.Map
 import scala.collection.JavaConverters._
 
 /**
-  *-Dinput_dir=/tmp/test/input
-  *-Doutput_dir=/tmp/test/output
-  *-DdefaultFS=hdfs://172.23.16.2:9000
-  *-DhadoopUser=root
+  -DuserMrClass=com.test.business.mapreduce.JavaMr
+  -Dyarn.resourcemanager.address=master:8032
+  -Dyarn.resourcemanager.scheduler.address=master:8030
+  -Dyarn.resourcemanager.resource-tracker.address=master:8031
+  -Dyarn.resourcemanager.admin.address=master:8033
+  -Dmapreduce.framework.name=yarn
+  -Dmapred.jar=jar/LearnHadoop.jar
+  -Dmapreduce.app-submission.cross-platform=true
+  -Dinput_dir=/tmp/test/input
+  -Doutput_dir=/tmp/test/output
+  -Dfs.defaultFS=hdfs://master:9000
+  -DhadoopUser=root
   */
 object ScalaMr extends ScalaMrBaseProgram {
   override protected def initComponentClassMap(componentClassMap: Map[String,Class[_]]): Unit = {

@@ -9,11 +9,11 @@
     <developer>
       <id>lvxw</id>
       <name>吕学文</name>
-      <email>lvxw@fun.tv</email>
+      <email>2622478542@@qq.com</email>
     </developer>
   </developers>
   <scm>
-    <developerConnection>scm:git:</developerConnection>
+    <developerConnection>scm:git:https://github.com/lvxw/learn_hadoop.git</developerConnection>
   </scm>
   <build>
     <sourceDirectory>${src.dir}</sourceDirectory>
@@ -50,6 +50,10 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <extdirs>${project.basedir}/lib</extdirs>
+          </compilerArguments>
         </configuration>
       </plugin>
       <plugin>
@@ -79,7 +83,7 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>groupId:artifactId</include>
+                  <include>org.scala-lang:scala-library</include>
                 </includes>
               </artifactSet>
             </configuration>
@@ -131,55 +135,60 @@
       </properties>
     </profile>
   </profiles>
+  <repositories>
+    <repository>
+      <releases />
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+      <id>maven-ali</id>
+      <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>2.7.7</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>hamcrest-core</artifactId>
-          <groupId>org.hamcrest</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>
-      <version>2.7.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-mapreduce-client-core</artifactId>
-      <version>2.7.2</version>
+      <version>2.7.7</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-hdfs</artifactId>
-      <version>2.7.2</version>
+      <version>2.7.7</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
-      <version>2.7.2</version>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.10</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>jdk.tools</groupId>
-      <artifactId>jdk.tools</artifactId>
-      <version>${java.version}</version>
+      <groupId>net.alchim31.maven</groupId>
+      <artifactId>scala-maven-plugin</artifactId>
+      <version>3.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.alluxio</groupId>
+      <artifactId>alluxio-2.1.0-client</artifactId>
+      <version>${alluxio.version}</version>
       <scope>system</scope>
-      <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+      <systemPath>${project.basedir}/lib/alluxio-2.1.0-client.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
@@ -187,13 +196,15 @@
     <src.dir>src/main/java</src.dir>
     <java.version>1.8</java.version>
     <sonar.language>java</sonar.language>
-    <jarfile.name>Artemis</jarfile.name>
+    <jarfile.name>LearnHadoop</jarfile.name>
     <src.res.dir>src/main/resources</src.res.dir>
     <test.src.dir>src/test/java</test.src.dir>
     <jar.out.dir>jar</jar.out.dir>
     <test.res.dir>src/test/resources</test.res.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <hadoop.version>2.7.2</hadoop.version>
+    <hadoop.version>2.7.7</hadoop.version>
+    <alluxio.version>2.1.0</alluxio.version>
+    <scala.version>2.12.8</scala.version>
   </properties>
 </project>
 
